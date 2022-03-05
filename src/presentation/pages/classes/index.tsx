@@ -32,39 +32,23 @@ import { useAppDispatch, useAppSelector } from '../../../data/hooks/redux';
 import { listClasses } from '../../../data/usecases/classes/list-all-classes';
 
 const Client: React.FC = () => {
-  // const dispatch = useAppDispatch();
-  // const classes = useAppSelector((state) => state.classes);
+  const dispatch = useAppDispatch();
+  const classes = useAppSelector((state) => state.classes);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [classSelected, setClass] = useState(null);
-  const [classes, setClasses] = useState({
-    data: [
-      {
-        id: 1,
-        period: 'Manhã',
-        class: '2° Viagem',
-      },
-      {
-        id: 2,
-        period: 'Manhã',
-        class: '2° Viagem',
-      },
-    ],
-  });
-
   const setSelectedClass = useCallback((value: any) => {
-    setClass(value);
+    console.log(value);
     onOpen();
   }, []);
 
-  // useEffect(() => {
-  //   listAllClasses();
-  // }, []);
+  useEffect(() => {
+    listAllClasses();
+  }, []);
 
-  // const listAllClasses = () => {
-  //   dispatch(listClasses());
-  // };
+  const listAllClasses = () => {
+    dispatch(listClasses());
+  };
 
   const drawer = () => (
     <Drawer isOpen={isOpen} placement="bottom" size="lg" onClose={onClose}>
@@ -100,14 +84,14 @@ const Client: React.FC = () => {
       </Header>
 
       {classes.data ? (
-        classes.data.map((value) => (
+        classes.data.map((value: any) => (
           <ClassesContainer
             onClick={() => setSelectedClass(value)}
-            key={value.id}
+            key={value.externalId}
           >
             <div className="line-effect" />
 
-            <h1>{value.class}</h1>
+            <h1>{value.name}</h1>
             <p>{value.period}</p>
 
             <Icon>{value.period === 'Tarde' ? <FaMoon /> : <FaSun />}</Icon>

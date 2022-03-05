@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
 import { authReducer } from './authentication/reducer';
-import { productsReducer } from './products/reducer';
+import { studentsReducer } from './students/reducer';
 import { classesReducer } from './classes/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  product: productsReducer,
+  students: studentsReducer,
   classes: classesReducer,
 });
 

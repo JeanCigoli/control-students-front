@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../../../data/hooks/redux';
 import Head from '../../../components/header';
-
 import {
   Container,
   Header,
@@ -26,49 +25,35 @@ import {
   Icon,
   DrawerIcon,
 } from './styled';
-import { listProducts } from '../../../../data/usecases/products/list-all-product';
-import history from '../../../../infra/history';
+import { listStudents } from '../../../../data/usecases/students/list-all-product';
+import { listClasses } from '../../../../data/usecases/classes/list-all-classes';
 
 const Products: React.FC = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.product);
+  const students = useAppSelector((state) => state.students);
+  const classes = useAppSelector((state) => state.classes);
+
+  console.log('STUDENTS', students);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [op, setOp] = useState([
-    {
-      name: '2° Viagem',
-      period: 'Manhã',
-    },
-  ]);
-
-  const [students, setStudents] = useState({
-    data: [
-      {
-        id: 1,
-        name: 'Jean Cigoli',
-        ra: '1718101729',
-        class: '3AM',
-      },
-    ],
-  });
 
   const setSelectedClass = useCallback((value: any) => {
     console.log(value);
     onOpen();
   }, []);
 
-  // useEffect(() => {
-  //   listAllProducts();
-  // }, []);
+  useEffect(() => {
+    listAllClasses();
+    listAllStudents();
+  }, []);
 
-  const onSubmit = (values: any) => {
-    console.log(values);
+  const listAllStudents = () => {
+    dispatch(listStudents());
   };
 
-  // const listAllProducts = () => {
-  //   dispatch(listProducts({ page: 0, limit: 10 }));
-  // };
+  const listAllClasses = () => {
+    dispatch(listClasses());
+  };
 
   const drawer = () => (
     <Drawer isOpen={isOpen} placement="bottom" size="lg" onClose={onClose}>
@@ -110,23 +95,34 @@ const Products: React.FC = () => {
             placeholder="Turmas"
             size="md"
           >
-            {op.map((value, index) => (
+            {classes.data.length ? (
+              classes.data.map((value: any) => (
+                <option
+                  key={value.externalId}
+                  value={value.externalId}
+                  style={{
+                    background: '#364559',
+                  }}
+                >
+                  {value.name} - {value.period}
+                </option>
+              ))
+            ) : (
               <option
-                key={index}
-                value={index}
+                value=""
                 style={{
                   background: '#364559',
                 }}
               >
-                {value.name} - {value.period}
+                Carregando...
               </option>
-            ))}
+            )}
           </Select>
         </FiltersContainer>
       </Header>
-      {students.data ? (
-        students.data.map((value) => (
-          <ClassesContainer key={value.id}>
+      {students.data.length ? (
+        students.data.map((value: any) => (
+          <ClassesContainer key={value.externalId}>
             <div className="line-effect" />
 
             <h1>{value.name}</h1>

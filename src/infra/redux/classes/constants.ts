@@ -1,4 +1,4 @@
-export const LIST_ALL_CLIENTS = '@classes/LIST_ALL_CLIENTS';
-export const CREATE_CLIENTS = '@classes/CREATE_CLIENTS';
-export const CLEAN_CLIENTS = '@classes/CLEAN_CLIENTS';
-export const FETCH_CLIENTS = '@classes/FETCH_PRODUCT';
+export const LIST_ALL_CLASSES = '@classes/LIST_ALL_CLASSES';
+export const CREATE_CLASSES = '@classes/CREATE_CLASSES';
+export const CLEAN_CLASSES = '@classes/CLEAN_CLASSES';
+export const FETCH_CLASSES = '@classes/FETCH_STUDENTS';

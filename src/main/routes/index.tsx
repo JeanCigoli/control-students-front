@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import { DashboardLayout } from '../../presentation/layouts';
-import { Home, Client } from '../../presentation/pages';
+import { Home, Classes } from '../../presentation/pages';
 import Routes from '../config/routes';
 import ProductRoute from './product';
 
@@ -20,7 +20,7 @@ const Router: React.FC = () => (
       path="/turmas"
       isPrivate={false}
       exact
-      component={Client}
+      component={Classes}
       layout={DashboardLayout}
     />
 
