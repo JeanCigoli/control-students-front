@@ -1,39 +1,55 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 20%;
-  margin-top: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const Card = styled.div<{ color: 'pink' | 'purple' | 'orange' }>`
-  width: 24vw;
+export const Card = styled.div`
+  width: 110px;
   height: 100%;
-  background-color: ${({ theme, color }) => theme.styles.colors[color].light}99;
+  background-color: ${({ theme }) => theme.styles.colors.black.opacity};
   border-radius: ${({ theme }) => theme.styles.spacing.base};
   padding: 1vh;
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
+  justify-content: space-around;
+  flex-direction: column;
+
+  p {
+    font-size: ${({ theme }) => theme.styles.font.small};
+  }
+
+  .students-count {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    line-height: 1.5em;
+
+    h3 {
+      font-size: ${({ theme }) => theme.styles.font.large};
+      font-weight: bolder;
+    }
+  }
 `;
 
-export const Icon = styled.div<{ color: 'pink' | 'purple' | 'orange' }>`
-  width: 70px;
-  height: 100%;
-  background-color: ${({ theme }) => theme.styles.colors.white.opacity};
-  border-radius: ${({ theme }) => theme.styles.spacing.short};
+export const Container = styled.div`
+  width: 100%;
+  height: 170px;
+  margin-top: 15px;
+
+  display: -webkit-inline-box;
+
+  overflow-x: scroll;
+
+  ${Card} + ${Card} {
+    margin-left: 5vw;
+  }
+`;
+
+export const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
   svg {
-    font-size: ${({ theme }) => theme.styles.font.medium};
-    color: ${({ theme, color }) => theme.styles.colors[color].medium};
+    font-size: ${({ theme }) => theme.styles.font.large};
+    color: ${({ theme }) => theme.styles.colors.white.normal};
   }
 `;

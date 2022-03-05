@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const LeftContainer = styled.div`
   width: 50vw;
   height: 100vh;
-  background-color: ${({ theme }) => theme.styles.colors.pink.medium};
+  background-color: ${({ theme }) => theme.styles.colors.blue.medium};
 
   display: flex;
   flex-direction: column;

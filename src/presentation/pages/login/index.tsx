@@ -66,7 +66,7 @@ const Login: React.FC = () => {
         <Button.Primary
           type="submit"
           label="Entrar"
-          backgroundColor="pink"
+          backgroundColor="blue"
           color="white"
           disabled={loginInfo.isFetch}
           isLoading={loginInfo.isFetch}

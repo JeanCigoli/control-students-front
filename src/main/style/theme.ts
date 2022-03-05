@@ -8,19 +8,10 @@ export const props = {
         medium: '#adadad',
         bold: '#808080',
       },
-      pink: {
-        light: '#fac3c3',
-        medium: '#efaba1',
-        bold: '#FE7A79',
-      },
-      orange: {
-        light: '#fcc695',
-        medium: '#FBAE69',
-        bold: '#fa9c48',
-      },
-      purple: {
-        light: '#D6ADB9',
-        medium: '#d1a1af',
+      blue: {
+        bold: '#5A8DEE',
+        medium: '#00CFDD',
+        light: '#46BEB3',
       },
       red: {
         medium: '#f14e32',
@@ -30,11 +21,11 @@ export const props = {
       },
       white: {
         normal: '#FFFFFF',
-        opacity: '#FFFFFFAA',
+        opacity: '#FFFFFFCC',
       },
       black: {
-        normal: '#060608',
-        opacity: '#06060899',
+        normal: '#293241',
+        opacity: '#364559',
       },
     },
     font: {
@@ -42,7 +33,7 @@ export const props = {
       small: '0.9rem',
       default: '1.1rem',
       medium: '1.5rem',
-      large: '2.0rem',
+      large: '1.8rem',
       xLarge: '2.5rem',
       xxLarge: '3.5rem',
     },

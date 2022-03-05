@@ -12,7 +12,7 @@ export const Icon = styled.div`
   div {
     width: 100%;
     height: 100%;
-    background-color: ${({ theme }) => theme.styles.colors.pink.medium};
+    background-color: ${({ theme }) => theme.styles.colors.blue.medium};
     border-radius: ${({ theme }) => theme.styles.spacing.base};
     flex-shrink: 0;
 

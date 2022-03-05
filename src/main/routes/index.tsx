@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import { Login, Home, Client, Products } from '../../presentation/pages';
-import { LoginLayout, DashboardLayout } from '../../presentation/layouts';
+
+import { DashboardLayout } from '../../presentation/layouts';
+import { Home, Client } from '../../presentation/pages';
 import Routes from '../config/routes';
 import ProductRoute from './product';
 
@@ -11,32 +12,33 @@ const Router: React.FC = () => (
       path="/"
       isPrivate={false}
       exact
-      component={Login}
-      layout={LoginLayout}
-    />
-
-    <Routes
-      path="/dashboard"
-      isPrivate
-      exact
       component={Home}
       layout={DashboardLayout}
     />
 
     <Routes
-      path="/clientes"
-      isPrivate
+      path="/turmas"
+      isPrivate={false}
       exact
       component={Client}
       layout={DashboardLayout}
     />
 
     <Routes
-      path="/estoques"
-      isPrivate
+      path="/alunos"
+      isPrivate={false}
       component={ProductRoute}
       layout={DashboardLayout}
     />
+
+    {/* <Routes
+      path="/clientes"
+      isPrivate
+      exact
+      component={Client}
+      layout={DashboardLayout}
+    />
+*/}
   </Switch>
 );
 

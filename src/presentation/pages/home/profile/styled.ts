@@ -2,10 +2,7 @@ import styled from 'styled-components';
 
 export const BannerContainer = styled.div`
   width: 100%;
-  height: 15%;
-  padding-left: 25px;
-  border-radius: ${({ theme }) => theme.styles.spacing.base};
-  color: ${({ theme }) => theme.styles.colors.black.normal};
+  height: 70px;
 
   position: relative;
 
@@ -15,18 +12,19 @@ export const BannerContainer = styled.div`
 
   img {
     position: absolute;
-    height: 80%;
-    right: 10px;
-    bottom: 10px;
+    height: 90%;
+    right: 0px;
+    bottom: 0px;
   }
 
   h1 {
+    font-size: ${({ theme }) => theme.styles.font.default};
     letter-spacing: 0.5px;
+    font-weight: bold;
   }
 
   p {
-    margin-top: 1vh;
     letter-spacing: 0.5px;
-    font-size: ${({ theme }) => theme.styles.font.default};
+    font-size: ${({ theme }) => theme.styles.font.small};
   }
 `;

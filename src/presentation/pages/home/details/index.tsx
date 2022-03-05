@@ -1,46 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Stat, StatNumber, StatHelpText } from '@chakra-ui/react';
-import { FaShoppingCart, FaDollarSign, FaChartLine } from 'react-icons/fa';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 import { Container, Card, Icon } from './styled';
-import { formatCash } from '../../../../utils';
-
-type LooseParams = {
-  color: 'pink' | 'purple' | 'orange';
-  [params: string]: any;
-}[];
 
 const Details: React.FC = () => {
-  const json: LooseParams = [
+  const [details, setDetails] = useState([
     {
-      icon: <FaShoppingCart />,
-      value: 1000.0,
-      name: 'Compras',
-      color: 'orange',
+      class: '1ª Viagem',
+      students: 43,
+      period: 'Manhã',
     },
     {
-      icon: <FaDollarSign />,
-      value: 2000.0,
-      name: 'Vendas',
-      color: 'purple',
+      class: '1ª Viagem',
+      students: 44,
+      period: 'Tarde',
     },
     {
-      icon: <FaChartLine />,
-      value: 500.0,
-      name: 'Despesas',
-      color: 'pink',
+      class: '2ª Viagem',
+      students: 41,
+      period: 'Manhã',
     },
-  ];
+    {
+      class: '2ª Viagem',
+      students: 41,
+      period: 'Manhã',
+    },
+  ]);
 
   return (
     <Container>
-      {json.map((value, number) => (
-        <Card color={value.color} key={number}>
-          <Icon color={value.color}>{value.icon}</Icon>
-          <Stat>
-            <StatNumber>{formatCash(value.value)}</StatNumber>
-            <StatHelpText>{value.name}</StatHelpText>
-          </Stat>
+      {details.map((value, number) => (
+        <Card key={number}>
+          <p>{value.class}</p>
+
+          <div className="students-count">
+            <h3>{value.students}</h3>
+            <p> alunos</p>
+          </div>
+
+          <Icon>{value.period === 'Tarde' ? <FaMoon /> : <FaSun />}</Icon>
         </Card>
       ))}
     </Container>

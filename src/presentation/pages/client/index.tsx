@@ -1,107 +1,133 @@
-import React, { useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
-import { FaUsers } from 'react-icons/fa';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
+  FaMapMarkedAlt,
+  FaSun,
+  FaMoon,
+  FaCloudDownloadAlt,
+  FaTrash,
+} from 'react-icons/fa';
+import {
+  Center,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
   Skeleton,
   Stack,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import Head from '../../components/header';
-import { Container, Header, FiltersContainer } from './styled';
-import Search from '../../components/search';
-import { formatDate, formatDocument } from '../../../utils';
+import {
+  Container,
+  Header,
+  ClassesContainer,
+  Icon,
+  DrawerIcon,
+} from './styled';
 import { useAppDispatch, useAppSelector } from '../../../data/hooks/redux';
 import { listClasses } from '../../../data/usecases/classes/list-all-classes';
 
 const Client: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const classes = useAppSelector((state) => state.classes);
+  // const dispatch = useAppDispatch();
+  // const classes = useAppSelector((state) => state.classes);
 
-  useEffect(() => {
-    listAllClients();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [classSelected, setClass] = useState(null);
+  const [classes, setClasses] = useState({
+    data: [
+      {
+        id: 1,
+        period: 'Manhã',
+        class: '2° Viagem',
+      },
+      {
+        id: 2,
+        period: 'Manhã',
+        class: '2° Viagem',
+      },
+    ],
+  });
+
+  const setSelectedClass = useCallback((value: any) => {
+    setClass(value);
+    onOpen();
   }, []);
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
+  // useEffect(() => {
+  //   listAllClasses();
+  // }, []);
 
-  const listAllClients = () => {
-    dispatch(listClasses());
-  };
+  // const listAllClasses = () => {
+  //   dispatch(listClasses());
+  // };
+
+  const drawer = () => (
+    <Drawer isOpen={isOpen} placement="bottom" size="lg" onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent backgroundColor="#293241" color="#FFF">
+        <DrawerCloseButton />
+        <DrawerHeader>O que deseja?</DrawerHeader>
+
+        <DrawerBody>
+          <Flex color="white">
+            <Center flex="1">
+              <DrawerIcon>
+                <FaCloudDownloadAlt />
+                <p>Baixar relatório</p>
+              </DrawerIcon>
+            </Center>
+            <Center flex="1">
+              <DrawerIcon>
+                <FaTrash />
+                <p>Excluir</p>
+              </DrawerIcon>
+            </Center>
+          </Flex>
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
+  );
 
   return (
     <Container>
       <Header>
-        <Head title="Usuários" icon={<FaUsers />} />
-
-        <FiltersContainer>
-          <Search
-            placeholder="Pesquise pelo nome ou documento"
-            onClick={onSubmit}
-          />
-
-          <Button
-            leftIcon={<MdAdd />}
-            ringColor="pink.500"
-            colorScheme="pink"
-            variant="ghost"
-          >
-            Novo usuário
-          </Button>
-        </FiltersContainer>
+        <Head title="Turmas" icon={<FaMapMarkedAlt />} />
       </Header>
 
       {classes.data ? (
-        <Table variant="striped" size="md" colorScheme="gray">
-          <TableCaption>Lista de Usuários</TableCaption>
-          <Thead>
-            <Tr>
-              <Th>id</Th>
-              <Th>nome</Th>
-              <Th>documento</Th>
-              <Th>telefone</Th>
-              <Th>criado em</Th>
-              <Th>ações</Th>
-            </Tr>
-          </Thead>
-          <Tbody bgColor="white">
-            {classes.data.map((value: any) => (
-              <Tr key={value.id}>
-                <Td>{value.id}</Td>
-                <Td>{value.name}</Td>
-                <Td>{formatDocument(value.document)}</Td>
-                <Td>{value.phone}</Td>
-                <Td>{formatDate(value.createdAt)}</Td>
-                <Td>
-                  <Button size="xs" colorScheme="pink" variant="solid">
-                    Visualizar
-                  </Button>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
+        classes.data.map((value) => (
+          <ClassesContainer
+            onClick={() => setSelectedClass(value)}
+            key={value.id}
+          >
+            <div className="line-effect" />
+
+            <h1>{value.class}</h1>
+            <p>{value.period}</p>
+
+            <Icon>{value.period === 'Tarde' ? <FaMoon /> : <FaSun />}</Icon>
+          </ClassesContainer>
+        ))
       ) : (
         <Stack spacing="20px">
           {[1, 2, 3, 4].map((_, index) => (
             <Skeleton
               borderRadius="md"
               key={index}
-              startColor="pink.500"
-              endColor="orange.500"
+              startColor="blue.500"
+              endColor="blue.500"
               height="20px"
             />
           ))}
         </Stack>
       )}
+
+      {drawer()}
     </Container>
   );
 };

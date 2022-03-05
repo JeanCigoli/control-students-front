@@ -1,24 +1,21 @@
 import React from 'react';
 
 import Graphic from './graphic';
-import Banner from './banner';
-import Sales from './sales';
+import Profile from './profile';
+import Students from './student';
 import Details from './details';
 
-import { Container, GraphicContainer, Divisor } from './styled';
+import { Container } from './styled';
 
 const Home: React.FC = () => (
   <Container>
-    <Banner />
+    <Profile />
+
+    <Students />
+
     <Details />
 
-    <Divisor>
-      <GraphicContainer>
-        <Graphic />
-      </GraphicContainer>
-
-      <Sales />
-    </Divisor>
+    <Graphic />
   </Container>
 );
 

@@ -1,83 +1,76 @@
-import React from 'react';
-import Chart from 'react-apexcharts';
-import { ApexOptions } from 'apexcharts';
-import {
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-} from '@chakra-ui/react';
-import { props } from '../../../../main/style/theme';
+import { Select } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { GraphicContainer, Button } from './styled';
 
 const Graphic: React.FC = () => {
-  const { styles } = props;
-
-  const options: { series: any; table: ApexOptions } = {
-    table: {
-      chart: {
-        type: 'area',
-        toolbar: {
-          autoSelected: 'pan',
-          show: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: 'smooth',
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.7,
-          opacityTo: 0.9,
-          stops: [0, 90, 100],
-        },
-      },
-      colors: [
-        styles.colors.pink.medium,
-        styles.colors.orange.medium,
-        styles.colors.purple.light,
-      ],
+  const [reports, setReports] = useState([
+    {
+      id: 1,
+      report: 'Chamada de alunos',
     },
-    series: [
-      {
-        name: 'Despesas',
-        data: [45, 52, 38, 45, 19, 23, 2],
-      },
-      {
-        name: 'Compras',
-        data: [65, 60, 37, 44, 80, 67, 40],
-      },
-      {
-        name: 'Vendas',
-        data: [50, 68, 57, 48, 15, 13, 24],
-      },
-    ],
-  };
+    {
+      id: 2,
+      report: 'Lista de alunos',
+    },
+  ]);
+
+  const [classes, setClasses] = useState([
+    {
+      id: 1,
+      class: '2º viagem - manhã',
+    },
+    {
+      id: 2,
+      class: 'Robótica',
+    },
+  ]);
 
   return (
-    <>
-      <Stat>
-        <StatLabel>Lucros / Perdas</StatLabel>
-        <StatNumber>R$ 500,00</StatNumber>
-        <StatHelpText>
-          <StatArrow type="increase" />
-          56%
-        </StatHelpText>
-      </Stat>
+    <GraphicContainer>
+      <h1>Relatórios</h1>
 
-      <Chart
-        type="area"
-        width="100%"
-        height="80%"
-        options={options.table}
-        series={options.series}
-      />
-    </>
+      <Select
+        bg="#364559"
+        height="60px"
+        placeholder="Tipo de relatórios"
+        size="md"
+        borderColor="#FFFFFF66"
+      >
+        {reports.map((value) => (
+          <option
+            key={value.id}
+            value={value.id}
+            style={{
+              background: '#364559',
+            }}
+          >
+            {value.report}
+          </option>
+        ))}
+      </Select>
+
+      <Select
+        bg="#364559"
+        height="60px"
+        placeholder="Selecione a turma"
+        size="md"
+        borderColor="#FFFFFF66"
+      >
+        {classes.map((value) => (
+          <option
+            key={value.id}
+            value={value.id}
+            style={{
+              background: '#364559',
+            }}
+          >
+            {value.class}
+          </option>
+        ))}
+      </Select>
+
+      <Button>Baixar</Button>
+    </GraphicContainer>
   );
 };
 

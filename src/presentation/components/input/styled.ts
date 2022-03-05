@@ -14,7 +14,7 @@ export const Container = styled.div`
     font-size: ${({ theme }) => theme.styles.font.medium};
     right: 10px;
     bottom: 10px;
-    color: ${({ theme }) => theme.styles.colors.pink.medium};
+    color: ${({ theme }) => theme.styles.colors.blue.medium};
   }
 `;
 
@@ -54,7 +54,7 @@ export const Input = styled.input<{ error: boolean }>`
   }
 
   :focus {
-    border: 1.5px solid ${({ theme }) => theme.styles.colors.pink.medium};
+    border: 1.5px solid ${({ theme }) => theme.styles.colors.blue.medium};
   }
 `;
 

@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
-import { IconButton, Tooltip } from '@chakra-ui/react';
-import { TiArrowBack } from 'react-icons/ti';
+import { IoMdAdd } from 'react-icons/io';
 import history from '../../../infra/history';
-import { DetailAll } from '../cards';
 import { Container, DetailsContainer, ArrowBackContainer } from './styled';
 
 const Header: React.FC<{ title: string; icon: any }> = ({ title, icon }) => {
@@ -13,24 +11,12 @@ const Header: React.FC<{ title: string; icon: any }> = ({ title, icon }) => {
   return (
     <Container>
       <DetailsContainer>
-        <DetailAll icon={icon} />
+        {icon}
         <h1>{title}</h1>
       </DetailsContainer>
 
       <ArrowBackContainer>
-        <Tooltip
-          label="voltar"
-          bg="blackAlpha.600"
-          placement="left"
-          fontSize="md"
-        >
-          <IconButton
-            colorScheme="blackAlpha"
-            aria-label="Retornar"
-            icon={<TiArrowBack />}
-            onClick={goBack}
-          />
-        </Tooltip>
+        <IoMdAdd />
       </ArrowBackContainer>
     </Container>
   );
