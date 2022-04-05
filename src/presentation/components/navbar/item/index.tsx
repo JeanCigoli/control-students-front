@@ -4,9 +4,17 @@ import { NavItemDTO } from '../../../../domain/components/nav-item-dto';
 
 import { Container } from './styled';
 
-const item: React.FC<NavItemDTO> = ({ active, icon, link }) => (
+const item: React.FC<NavItemDTO> = ({
+  active,
+  icon,
+  link,
+  number,
+  onClick,
+}) => (
   <Container active={active}>
-    <Link to={link}>{icon} </Link>
+    <Link onClick={() => onClick(number)} to={link}>
+      {icon}
+    </Link>
   </Container>
 );
 

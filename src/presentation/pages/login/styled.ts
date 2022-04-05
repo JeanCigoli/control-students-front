@@ -23,7 +23,7 @@ export const Form = styled.form`
     margin-bottom: 15px;
 
     font-size: ${({ theme }) => theme.styles.font.large};
-    color: ${({ theme }) => theme.styles.colors.black.normal};
+    color: ${({ theme }) => theme.styles.colors.white.normal};
   }
 `;
 
@@ -34,5 +34,5 @@ export const Paragraph = styled.p`
   font-weight: lighter;
 
   font-size: ${({ theme }) => theme.styles.font.default};
-  color: ${({ theme }) => theme.styles.colors.gray.medium};
+  color: ${({ theme }) => theme.styles.colors.white.opacity};
 `;

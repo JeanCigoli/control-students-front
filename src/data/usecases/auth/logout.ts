@@ -1,12 +1,14 @@
-import history from '../../../infra/history';
+import { useHistory } from 'react-router-dom';
 import { requestError } from '../../../utils/error';
-import { AppDispatch } from '../../../domain/redux/action';
+import { Dispatch } from '../../../domain/redux/action';
 import { LOGOUT } from '../../../infra/redux/authentication/constants';
 import { TOKEN } from '../../../main/config/constants';
 import { SessionStorage } from '../../../utils/storage/session';
 
-export const logout = () => async (dispatch: AppDispatch) => {
+export const logout = () => async (dispatch: Dispatch) => {
   try {
+    const history = useHistory();
+
     SessionStorage.removeItem(TOKEN);
     dispatch({ type: LOGOUT });
 

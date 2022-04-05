@@ -1,27 +1,19 @@
 import { Select } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useAppSelector } from '../../../../data/hooks/redux';
 import { GraphicContainer, Button } from './styled';
 
 const Graphic: React.FC = () => {
+  const classes = useAppSelector((state) => state.classes);
+
   const [reports, setReports] = useState([
     {
-      id: 1,
+      externalId: 1,
       report: 'Chamada de alunos',
     },
     {
-      id: 2,
+      externalId: 2,
       report: 'Lista de alunos',
-    },
-  ]);
-
-  const [classes, setClasses] = useState([
-    {
-      id: 1,
-      class: '2º viagem - manhã',
-    },
-    {
-      id: 2,
-      class: 'Robótica',
     },
   ]);
 
@@ -38,8 +30,8 @@ const Graphic: React.FC = () => {
       >
         {reports.map((value) => (
           <option
-            key={value.id}
-            value={value.id}
+            key={value.externalId}
+            value={value.externalId}
             style={{
               background: '#364559',
             }}
@@ -56,15 +48,15 @@ const Graphic: React.FC = () => {
         size="md"
         borderColor="#FFFFFF66"
       >
-        {classes.map((value) => (
+        {classes.data.map((value: any) => (
           <option
-            key={value.id}
-            value={value.id}
+            key={value.externalId}
+            value={value.externalId}
             style={{
               background: '#364559',
             }}
           >
-            {value.class}
+            {value.name} - {value.period}
           </option>
         ))}
       </Select>

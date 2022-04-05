@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { useForm } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,6 +16,7 @@ import { authentication } from '../../../data/usecases/auth/authentication';
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const loginInfo = useAppSelector((state) => state.auth);
+  const history = useHistory();
 
   console.log(loginInfo);
 
@@ -28,7 +31,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(true);
 
   const onSubmit = (value: LoginType) => {
-    dispatch(authentication(value));
+    dispatch(authentication(value, history));
   };
 
   const handleShowPassword = () => {
@@ -40,13 +43,13 @@ const Login: React.FC = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <h2>Vamos lá.</h2>
 
-        <Paragraph>Organize seu negócio! Entre com sua conta.</Paragraph>
+        <Paragraph>Organize seus alunos! Entre com sua conta.</Paragraph>
 
         <Input
           label="Usuário"
           type="text"
-          {...register('login')}
-          error={errors.login}
+          {...register('email')}
+          error={errors.email}
         />
 
         <Input

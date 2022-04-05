@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -13,17 +13,9 @@ export const Container = styled.div`
     position: absolute;
     font-size: ${({ theme }) => theme.styles.font.medium};
     right: 10px;
-    bottom: 10px;
+    bottom: 15px;
     color: ${({ theme }) => theme.styles.colors.blue.medium};
   }
-`;
-
-export const Label = styled.label`
-  width: 100%;
-  height: auto;
-  padding: 5px 0;
-  color: ${({ theme }) => theme.styles.colors.black.normal};
-  font-size: ${({ theme }) => theme.styles.font.default};
 `;
 
 export const Input = styled.input<{ error: boolean }>`
@@ -31,11 +23,13 @@ export const Input = styled.input<{ error: boolean }>`
 
   min-height: 40px;
   height: 6.5vh;
-  max-height: 47px;
+  max-height: auto;
 
   outline: none;
   transition: all 0.3s;
   background-color: transparent;
+
+  color: ${({ theme }) => theme.styles.colors.white.normal};
 
   font-size: ${({ theme }) => theme.styles.font.small};
   padding-left: ${({ theme }) => theme.styles.spacing.short};
@@ -54,7 +48,7 @@ export const Input = styled.input<{ error: boolean }>`
   }
 
   :focus {
-    border: 1.5px solid ${({ theme }) => theme.styles.colors.blue.medium};
+    border: 1.5px solid ${({ theme }) => theme.styles.colors.blue.bold};
   }
 `;
 

@@ -17,7 +17,7 @@ const classesReducer = (state = INITIAL_STATE, action: ActionsType) => {
     case LIST_ALL_CLASSES:
       return {
         data: action.payload,
-        isFetch: false,
+        isFetch: state.isFetch,
       };
     case CREATE_CLASSES:
       return INITIAL_STATE;
@@ -26,7 +26,7 @@ const classesReducer = (state = INITIAL_STATE, action: ActionsType) => {
     case FETCH_CLASSES:
       return {
         ...state,
-        isFetch: !state.isFetch,
+        isFetch: action.payload === 'INIT_LOAD',
       };
     default:
       return state;

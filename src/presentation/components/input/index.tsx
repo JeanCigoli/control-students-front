@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { InputDTO } from '../../../domain/components/input-dto';
 
-import { Container, Error, Input, Label } from './styled';
+import { Container, Error, Input } from './styled';
 
 const InputComponent = React.forwardRef<HTMLInputElement, InputDTO>(
   (props, ref) => {
@@ -9,9 +9,14 @@ const InputComponent = React.forwardRef<HTMLInputElement, InputDTO>(
 
     return (
       <Container>
-        <Label htmlFor={name}>{label}</Label>
-
-        <Input type={type} name={name} error={!!error} ref={ref} {...rest} />
+        <Input
+          placeholder={label}
+          type={type}
+          name={name}
+          error={!!error}
+          ref={ref}
+          {...rest}
+        />
 
         {icon}
 

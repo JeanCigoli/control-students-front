@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { cpf as validCpf, cnpj as validCnpj } from 'cpf-cnpj-validator';
+import { getDayOfWeek } from '../utils/date';
 
 export const string = (field: string) =>
   yup
@@ -12,6 +13,9 @@ export const number = (field: string) =>
     .string()
     .nullable(true)
     .matches(/[0-9]/, `${field} precisa ser um número`);
+
+export const uuid = (field: string) =>
+  yup.string().uuid(`${field} não é uma opção válida`);
 
 export const stringNullable = yup.string().notRequired().nullable(true);
 
@@ -28,10 +32,8 @@ export const email = yup
 export const password = yup
   .string()
   .trim()
-  .matches(
-    /^([a-z]|[A-Z])(?=.*[@#$%^&+=]).+$/gi,
-    'A senha está fora dos padrões'
-  )
+  .nullable(false)
+  .min(5, 'A senha precisa ter no mínimo 5 caracteres')
   .required('A senha é obrigatória');
 
 export const document = yup
@@ -43,6 +45,15 @@ export const document = yup
     }
 
     return validCnpj.isValid(value);
+  });
+
+export const dayOfWeek = yup
+  .mixed()
+  .nullable()
+  .test('is-day-of-week', 'O dia da semana não foi selecionado', (value) => {
+    const days = getDayOfWeek();
+
+    return !!days.find((day) => day.externalId === value);
   });
 
 export const phone = yup

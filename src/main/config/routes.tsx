@@ -23,7 +23,7 @@ const RouterWrapper: React.FC<Routes> = ({
   }
 
   if (session && !isPrivate) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/home" />;
   }
 
   return (

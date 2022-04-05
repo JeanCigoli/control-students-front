@@ -44,9 +44,16 @@ export const Container = styled.div`
   }
 `;
 
+export const Layout = styled.div`
+  max-width: 100%;
+  height: 80%;
+
+  overflow-x: scroll;
+`;
+
 export const Header = styled.div`
   width: 100%;
-  height: 100px;
+  height: 80px;
 `;
 
 export const Icon = styled.div`

@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
-import history from '../../../infra/history';
+import { formateSnakeCaseKeysForCamelCase } from '@badass-team-code/formatted-cases-words';
 import { requestError } from '../../../utils/error';
-import { AppDispatch } from '../../../domain/redux/action';
+import { Dispatch } from '../../../domain/redux/action';
 import {
   AUTHENTICATION,
   FETCH_AUTH,
@@ -9,23 +9,31 @@ import {
 import { auth } from '../../../infra/http/web-service';
 import { SESSION_AUTH, TOKEN } from '../../../main/config/constants';
 import { SessionStorage } from '../../../utils/storage/session';
+import { LoginType } from '../../../domain/forms/login-form';
 
 export const authentication =
-  (params: any) => async (dispatch: AppDispatch) => {
-    dispatch({ type: FETCH_AUTH });
+  (params: LoginType, history: any) => async (dispatch: Dispatch) => {
+    dispatch({ type: FETCH_AUTH, payload: 'INIT_LOAD' });
     try {
       const { data } = await auth.authentication(params);
 
-      SessionStorage.setItem(TOKEN, data.payload.accessToken);
-      SessionStorage.setItem(SESSION_AUTH, { name: data.payload.name });
+      console.log(data);
 
-      dispatch({ type: AUTHENTICATION, payload: { name: data.payload.name } });
+      const authParams = formateSnakeCaseKeysForCamelCase(data.payload);
+
+      console.log(authParams);
+
+      SessionStorage.setItem(TOKEN, authParams.accessToken);
+      SessionStorage.setItem(SESSION_AUTH, authParams.employee);
+
+      dispatch({ type: AUTHENTICATION, payload: authParams.employee });
 
       toast.success(data.message);
-      history.push('/dashboard');
+      history.push('/home');
     } catch (error: any) {
+      console.log(error);
       requestError(error);
     } finally {
-      dispatch({ type: FETCH_AUTH });
+      dispatch({ type: FETCH_AUTH, payload: 'FINISH_LOAD' });
     }
   };

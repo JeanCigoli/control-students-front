@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { IoMdSchool, IoMdSettings } from 'react-icons/io';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import {
@@ -25,35 +26,42 @@ import {
   Icon,
   DrawerIcon,
 } from './styled';
-import { listStudents } from '../../../../data/usecases/students/list-all-product';
-import { listClasses } from '../../../../data/usecases/classes/list-all-classes';
+import { listClasses, listStudents } from '../../../../data/usecases';
 
 const Products: React.FC = () => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const students = useAppSelector((state) => state.students);
   const classes = useAppSelector((state) => state.classes);
 
-  console.log('STUDENTS', students);
+  const [classId, setClassId] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const setSelectedClass = useCallback((value: any) => {
-    console.log(value);
-    onOpen();
+  useEffect(() => {
+    listAllStudents();
+    listClass();
   }, []);
 
   useEffect(() => {
-    listAllClasses();
     listAllStudents();
-  }, []);
+  }, [classId]);
 
-  const listAllStudents = () => {
-    dispatch(listStudents());
-  };
-
-  const listAllClasses = () => {
+  const listClass = () => {
     dispatch(listClasses());
   };
+
+  const listAllStudents = () => {
+    dispatch(listStudents(classId));
+  };
+
+  const headerAction = useCallback(() => {
+    history.push('/alunos/cadastro');
+  }, []);
+
+  const setSelectedClass = useCallback((value: any) => {
+    onOpen();
+  }, []);
 
   const drawer = () => (
     <Drawer isOpen={isOpen} placement="bottom" size="lg" onClose={onClose}>
@@ -85,7 +93,7 @@ const Products: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Head title="Alunos" icon={<IoMdSchool />} />
+        <Head title="Alunos" icon={<IoMdSchool />} onClick={headerAction} />
 
         <FiltersContainer>
           <Select
@@ -94,8 +102,11 @@ const Products: React.FC = () => {
             height="60px"
             placeholder="Turmas"
             size="md"
+            onChange={(value) => {
+              setClassId(() => value.target.value);
+            }}
           >
-            {classes.data.length ? (
+            {classes.data.length &&
               classes.data.map((value: any) => (
                 <option
                   key={value.externalId}
@@ -106,17 +117,7 @@ const Products: React.FC = () => {
                 >
                   {value.name} - {value.period}
                 </option>
-              ))
-            ) : (
-              <option
-                value=""
-                style={{
-                  background: '#364559',
-                }}
-              >
-                Carregando...
-              </option>
-            )}
+              ))}
           </Select>
         </FiltersContainer>
       </Header>

@@ -1,24 +1,33 @@
 import { Text } from '@chakra-ui/react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import salesImage from '../../../../assets/user.png';
-import history from '../../../../infra/history';
+import { useAppDispatch, useAppSelector } from '../../../../data/hooks/redux';
+import { listCountStudents } from '../../../../data/usecases/graphics/list-count-students';
 import { SalesContainer, Button } from './styled';
 
 const Students: React.FC = () => {
-  const [details, setDetails] = useState({
-    quantityStudents: 144,
-    quantityVacancies: 10,
-  });
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+  const details = useAppSelector((state) => state.graphics.data);
 
   const goToClasses = useCallback(() => {
-    history.push('/turmas');
+    history.push('/alunos');
   }, []);
+
+  useEffect(() => {
+    listStudents();
+  }, []);
+
+  const listStudents = () => {
+    dispatch(listCountStudents());
+  };
 
   return (
     <SalesContainer>
       <div className="title">
         <Text fontSize="4xl" fontWeight="bold">
-          {details.quantityStudents}
+          {details.studentsAll.students}
         </Text>
         <Text fontSize="md" fontWeight="normal">
           alunos
@@ -26,7 +35,7 @@ const Students: React.FC = () => {
       </div>
 
       <Text fontSize="md" fontWeight="normal">
-        <span>{details.quantityVacancies}</span> vagas disponíveis no momento
+        <span>{details.studentsAll.vacancies}</span> vagas no ensino fundamental
       </Text>
 
       <img src={salesImage} alt="Banner de frutas de vendas" />

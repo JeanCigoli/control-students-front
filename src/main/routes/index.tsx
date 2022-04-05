@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-import { DashboardLayout } from '../../presentation/layouts';
-import { Home, Classes } from '../../presentation/pages';
+import { DashboardLayout, LoginLayout } from '../../presentation/layouts';
+import { Home, Login } from '../../presentation/pages';
 import Routes from '../config/routes';
 import ProductRoute from './product';
+import ClassesRoute from './classes';
 
 const Router: React.FC = () => (
   <Switch>
@@ -12,33 +13,31 @@ const Router: React.FC = () => (
       path="/"
       isPrivate={false}
       exact
+      component={Login}
+      layout={LoginLayout}
+    />
+
+    <Routes
+      path="/home"
+      isPrivate
+      exact
       component={Home}
       layout={DashboardLayout}
     />
 
     <Routes
       path="/turmas"
-      isPrivate={false}
-      exact
-      component={Classes}
+      isPrivate
+      component={ClassesRoute}
       layout={DashboardLayout}
     />
 
     <Routes
       path="/alunos"
-      isPrivate={false}
+      isPrivate
       component={ProductRoute}
       layout={DashboardLayout}
     />
-
-    {/* <Routes
-      path="/clientes"
-      isPrivate
-      exact
-      component={Client}
-      layout={DashboardLayout}
-    />
-*/}
   </Switch>
 );
 

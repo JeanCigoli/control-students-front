@@ -1,25 +1,20 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
-import history from '../../../infra/history';
+import { TiArrowBack } from 'react-icons/ti';
+import { HeaderDto } from '../../../domain/components/header-dto';
 import { Container, DetailsContainer, ArrowBackContainer } from './styled';
 
-const Header: React.FC<{ title: string; icon: any }> = ({ title, icon }) => {
-  const goBack = useCallback(() => {
-    history.back();
-  }, []);
+const Header: React.FC<HeaderDto> = ({ title, icon, onClick, isGoBack }) => (
+  <Container>
+    <DetailsContainer>
+      {icon}
+      <h1>{title}</h1>
+    </DetailsContainer>
 
-  return (
-    <Container>
-      <DetailsContainer>
-        {icon}
-        <h1>{title}</h1>
-      </DetailsContainer>
-
-      <ArrowBackContainer>
-        <IoMdAdd />
-      </ArrowBackContainer>
-    </Container>
-  );
-};
+    <ArrowBackContainer onClick={onClick}>
+      {isGoBack ? <TiArrowBack /> : <IoMdAdd />}
+    </ArrowBackContainer>
+  </Container>
+);
 
 export default Header;

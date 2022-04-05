@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const LeftContainer = styled.div`
   width: 50vw;
   height: 100vh;
-  background-color: ${({ theme }) => theme.styles.colors.blue.medium};
+  background-color: ${({ theme }) => theme.styles.colors.blue.bold};
 
   display: flex;
   flex-direction: column;
@@ -28,26 +28,12 @@ export const LeftContainer = styled.div`
     color: ${({ theme }) => theme.styles.colors.white.normal};
   }
 
-  img {
-    max-height: 55%;
-  }
-
-  @media ${({ theme }) => theme.devices.laptop} {
-    img {
-      max-width: 90%;
-    }
-  }
-
   @media ${({ theme }) => theme.devices.mobileL} {
     width: 10vw;
     justify-content: flex-start;
     padding-top: 15px;
 
     h1 {
-      display: none;
-    }
-
-    img {
       display: none;
     }
   }
@@ -58,7 +44,9 @@ export const RightContainer = styled.div`
   height: 100vh;
   padding: 20px;
 
+  background-color: ${({ theme }) => theme.styles.colors.black.normal};
+
   @media ${({ theme }) => theme.devices.mobileL} {
-    width: 85vw;
+    width: 90vw;
   }
 `;

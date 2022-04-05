@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import Graphic from './graphic';
+import Report from './report';
 import Profile from './profile';
 import Students from './student';
 import Details from './details';
 
 import { Container } from './styled';
+import { useAppDispatch } from '../../../data/hooks/redux';
+import { listClasses } from '../../../data/usecases/classes/list-all-classes';
 
-const Home: React.FC = () => (
-  <Container>
-    <Profile />
+const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-    <Students />
+  useEffect(() => {
+    listDefaultValues();
+  }, []);
 
-    <Details />
+  const listDefaultValues = () => {
+    dispatch(listClasses());
+  };
 
-    <Graphic />
-  </Container>
-);
+  return (
+    <Container>
+      <Profile />
+
+      <Students />
+
+      <Details />
+
+      <Report />
+    </Container>
+  );
+};
 
 export default Home;
