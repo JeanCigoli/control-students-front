@@ -35,7 +35,7 @@ const Students: React.FC = () => {
       </div>
 
       <Text fontSize="md" fontWeight="normal">
-        <span>{details.studentsAll.vacancies}</span> vagas no ensino fundamental
+        <span>{details.studentsAll.vacancies}</span> vagas na grade escolar
       </Text>
 
       <img src={salesImage} alt="Banner de frutas de vendas" />

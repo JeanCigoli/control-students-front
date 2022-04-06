@@ -13,3 +13,4 @@ export * from './period/list-all-periods';
 
 export * from './students/list-all-students';
 export * from './students/create-students';
+export * from './students/delete-students';

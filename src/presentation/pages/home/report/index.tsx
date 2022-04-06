@@ -21,41 +21,17 @@ const Graphic: React.FC = () => {
     <GraphicContainer>
       <h1>Relatórios</h1>
 
-      <Select
-        bg="#364559"
-        height="60px"
-        placeholder="Tipo de relatórios"
-        size="md"
-        borderColor="#FFFFFF66"
-      >
+      <Select height="60px" placeholder="Tipo de relatórios" size="md">
         {reports.map((value) => (
-          <option
-            key={value.externalId}
-            value={value.externalId}
-            style={{
-              background: '#364559',
-            }}
-          >
+          <option key={value.externalId} value={value.externalId}>
             {value.report}
           </option>
         ))}
       </Select>
 
-      <Select
-        bg="#364559"
-        height="60px"
-        placeholder="Selecione a turma"
-        size="md"
-        borderColor="#FFFFFF66"
-      >
+      <Select height="60px" placeholder="Selecione a turma" size="md">
         {classes.data.map((value: any) => (
-          <option
-            key={value.externalId}
-            value={value.externalId}
-            style={{
-              background: '#364559',
-            }}
-          >
+          <option key={value.externalId} value={value.externalId}>
             {value.name} - {value.period}
           </option>
         ))}

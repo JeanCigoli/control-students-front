@@ -15,4 +15,7 @@ export const theme = extendTheme({
       900: '#5A8DEE',
     },
   },
+  config: {
+    initialColorMode: 'dark',
+  },
 });

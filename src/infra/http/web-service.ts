@@ -23,6 +23,7 @@ export const students = {
   listAll: (params?: any) =>
     api.get(`v1/students?${transformObjectToQueryParams(params || {})}`),
   create: (params: any) => api.post('v1/students', params),
+  delete: (id: string) => api.delete(`v1/students/${id}`),
 };
 
 export const classes = {

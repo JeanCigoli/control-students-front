@@ -39,6 +39,10 @@ export const Container = styled.div`
   padding: 5px;
   box-sizing: border-box;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   ${ClassesContainer} + ${ClassesContainer} {
     margin-top: 15px;
   }
