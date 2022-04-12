@@ -17,11 +17,7 @@ export const authentication =
     try {
       const { data } = await auth.authentication(params);
 
-      console.log(data);
-
       const authParams = formateSnakeCaseKeysForCamelCase(data.payload);
-
-      console.log(authParams);
 
       SessionStorage.setItem(TOKEN, authParams.accessToken);
       SessionStorage.setItem(SESSION_AUTH, authParams.employee);
@@ -31,7 +27,6 @@ export const authentication =
       toast.success(data.message);
       history.push('/home');
     } catch (error: any) {
-      console.log(error);
       requestError(error);
     } finally {
       dispatch({ type: FETCH_AUTH, payload: 'FINISH_LOAD' });

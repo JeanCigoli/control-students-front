@@ -18,8 +18,6 @@ const Login: React.FC = () => {
   const loginInfo = useAppSelector((state) => state.auth);
   const history = useHistory();
 
-  console.log(loginInfo);
-
   const {
     register,
     handleSubmit,

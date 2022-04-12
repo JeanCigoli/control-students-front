@@ -39,13 +39,17 @@ export const Container = styled.div`
   padding: 5px;
   box-sizing: border-box;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   ${ClassesContainer} + ${ClassesContainer} {
     margin-top: 15px;
   }
 `;
 
 export const Layout = styled.div`
-  max-width: 100%;
+  width: 100%;
   height: 80%;
 
   overflow-x: scroll;

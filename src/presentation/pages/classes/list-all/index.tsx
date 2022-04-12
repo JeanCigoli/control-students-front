@@ -1,35 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  FaMapMarkedAlt,
-  FaSun,
-  FaMoon,
-  FaCloudDownloadAlt,
-  FaTrash,
-} from 'react-icons/fa';
-import {
-  Center,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
-  Skeleton,
-  Stack,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { FaMapMarkedAlt, FaSun, FaMoon } from 'react-icons/fa';
+import { Skeleton, Stack, useDisclosure } from '@chakra-ui/react';
 
 import Head from '../../../components/header';
-import {
-  Container,
-  Header,
-  ClassesContainer,
-  Icon,
-  DrawerIcon,
-  Layout,
-} from './styled';
+import Drawer from './drawer';
+import { Container, Header, ClassesContainer, Icon, Layout } from './styled';
 import { useAppDispatch, useAppSelector } from '../../../../data/hooks/redux';
 import { listClasses } from '../../../../data/usecases/classes/list-all-classes';
 
@@ -39,6 +15,7 @@ const Client: React.FC = () => {
   const classes = useAppSelector((state) => state.classes);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [classe, setClasse] = useState(null);
 
   useEffect(() => {
     listAllClasses();
@@ -53,36 +30,9 @@ const Client: React.FC = () => {
   }, []);
 
   const setSelectedClass = useCallback((value: any) => {
-    console.log(value);
+    setClasse(value);
     onOpen();
   }, []);
-
-  const drawer = () => (
-    <Drawer isOpen={isOpen} placement="bottom" size="lg" onClose={onClose}>
-      <DrawerOverlay />
-      <DrawerContent backgroundColor="#293241" color="#FFF">
-        <DrawerCloseButton />
-        <DrawerHeader>O que deseja?</DrawerHeader>
-
-        <DrawerBody>
-          <Flex color="white">
-            <Center flex="1">
-              <DrawerIcon>
-                <FaCloudDownloadAlt />
-                <p>Baixar relatório</p>
-              </DrawerIcon>
-            </Center>
-            <Center flex="1">
-              <DrawerIcon>
-                <FaTrash />
-                <p>Excluir</p>
-              </DrawerIcon>
-            </Center>
-          </Flex>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
-  );
 
   return (
     <Container>
@@ -91,20 +41,24 @@ const Client: React.FC = () => {
       </Header>
 
       <Layout>
-        {classes.data ? (
-          classes.data.map((value: any) => (
-            <ClassesContainer
-              onClick={() => setSelectedClass(value)}
-              key={value.externalId}
-            >
-              <div className="line-effect" />
+        {!classes.isFetch ? (
+          classes.data.length ? (
+            classes.data.map((value: any) => (
+              <ClassesContainer
+                onClick={() => setSelectedClass(value)}
+                key={value.externalId}
+              >
+                <div className="line-effect" />
 
-              <h1>{value.name}</h1>
-              <p>{value.period}</p>
+                <h1>{value.name}</h1>
+                <p>{value.period}</p>
 
-              <Icon>{value.period === 'Tarde' ? <FaMoon /> : <FaSun />}</Icon>
-            </ClassesContainer>
-          ))
+                <Icon>{value.period === 'Tarde' ? <FaMoon /> : <FaSun />}</Icon>
+              </ClassesContainer>
+            ))
+          ) : (
+            <p>Nenhuma turma cadastrada!</p>
+          )
         ) : (
           <Stack spacing="20px">
             {[1, 2, 3, 4].map((_, index) => (
@@ -120,7 +74,7 @@ const Client: React.FC = () => {
         )}
       </Layout>
 
-      {drawer()}
+      <Drawer state={classe} isOpen={isOpen} onClose={onClose} />
     </Container>
   );
 };

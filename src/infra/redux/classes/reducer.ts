@@ -3,6 +3,7 @@ import { ClassesReducer } from '../../../domain/redux/reducers';
 import {
   CLEAN_CLASSES,
   CREATE_CLASSES,
+  DELETE_CLASSES,
   FETCH_CLASSES,
   LIST_ALL_CLASSES,
 } from './constants';
@@ -21,6 +22,11 @@ const classesReducer = (state = INITIAL_STATE, action: ActionsType) => {
       };
     case CREATE_CLASSES:
       return INITIAL_STATE;
+    case DELETE_CLASSES:
+      return {
+        data: action.payload,
+        isFetch: state.isFetch,
+      };
     case CLEAN_CLASSES:
       return INITIAL_STATE;
     case FETCH_CLASSES:

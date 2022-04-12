@@ -30,6 +30,7 @@ export const classes = {
   listAll: () => api.get('v1/classes'),
   listType: () => api.get('v1/classes-types'),
   create: (params: any) => api.post('v1/classes', params),
+  delete: (id: string) => api.delete(`v1/classes/${id}`),
 };
 
 export const period = {

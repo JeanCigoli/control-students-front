@@ -3,6 +3,7 @@ export * from './auth/logout';
 
 export * from './classes/create-classes';
 export * from './classes/list-all-classes';
+export * from './classes/delete-classes';
 
 export * from './classes-type/list-all-classes-type';
 
