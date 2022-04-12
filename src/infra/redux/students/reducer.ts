@@ -6,6 +6,7 @@ import {
   CREATE_STUDENTS,
   FETCH_STUDENTS,
   DELETE_STUDENTS,
+  UPDATE_STUDENTS,
 } from './constants';
 
 const INITIAL_STATE = {
@@ -21,6 +22,8 @@ const studentsReducer = (state = INITIAL_STATE, action: ActionsType) => {
         isFetch: state.isFetch,
       };
     case CREATE_STUDENTS:
+      return INITIAL_STATE;
+    case UPDATE_STUDENTS:
       return INITIAL_STATE;
     case DELETE_STUDENTS:
       return {

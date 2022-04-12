@@ -5,7 +5,7 @@ import Profile from './profile';
 import Students from './student';
 import Details from './details';
 
-import { Container } from './styled';
+import { Container, Layout } from './styled';
 import { useAppDispatch } from '../../../data/hooks/redux';
 import { listClasses } from '../../../data/usecases/classes/list-all-classes';
 
@@ -22,13 +22,15 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Profile />
+      <Layout>
+        <Profile />
 
-      <Students />
+        <Students />
 
-      <Details />
+        <Details />
 
-      <Report />
+        <Report />
+      </Layout>
     </Container>
   );
 };

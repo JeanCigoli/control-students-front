@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Drawer,
   DrawerOverlay,
@@ -30,6 +31,7 @@ const DrawerContainer: React.FC<DrawerDto> = ({
   state,
   onClose: onCloseDrawer,
 }) => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,6 +43,12 @@ const DrawerContainer: React.FC<DrawerDto> = ({
     onCloseDrawer();
     onClose();
     dispatch(deleteStudents(state.externalId));
+  };
+
+  const updateStudent = () => {
+    history.push('/alunos/atualização', {
+      student: state,
+    });
   };
 
   const modal = () => (
@@ -86,7 +94,7 @@ const DrawerContainer: React.FC<DrawerDto> = ({
           <DrawerBody>
             <Flex color="white">
               <Center flex="1">
-                <DrawerIcon>
+                <DrawerIcon onClick={updateStudent}>
                   <FaEdit />
                   <p>Editar</p>
                 </DrawerIcon>

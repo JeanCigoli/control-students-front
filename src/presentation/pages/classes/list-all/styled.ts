@@ -39,10 +39,6 @@ export const Container = styled.div`
   padding: 5px;
   box-sizing: border-box;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   ${ClassesContainer} + ${ClassesContainer} {
     margin-top: 15px;
   }
@@ -51,6 +47,10 @@ export const Container = styled.div`
 export const Layout = styled.div`
   width: 100%;
   height: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   overflow-x: scroll;
 `;

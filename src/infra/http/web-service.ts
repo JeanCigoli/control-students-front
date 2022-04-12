@@ -24,6 +24,7 @@ export const students = {
     api.get(`v1/students?${transformObjectToQueryParams(params || {})}`),
   create: (params: any) => api.post('v1/students', params),
   delete: (id: string) => api.delete(`v1/students/${id}`),
+  update: (id: string, params: any) => api.put(`v1/students/${id}`, params),
 };
 
 export const classes = {
